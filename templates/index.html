@@ -2,13 +2,47 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-PCM - Compare Rules
+PCM Tools
 {% endblock %}
 
 {% block content %}
 <div class="container" style="margin-top: 80px">
-    <div class="row g-5 my-1">
-        <p>I try to bring tools that to support the PCM (HPCM Management Ledge or PCM CS)</p>
+    <div class="p-5 mb-4 bg-light rounded-3">
+      <div class="container-fluid py-3">
+        <h1 class="display-5 fw-bold">PCM Tools</h1>
+        <p class="col-md-8 fs-4">
+            This page provides the tools <i>(as of now there's only one)</i> that are useful for essbase developers,
+            especially for the PCM (HPCM Management Ledger or PCMCS in Oracle EPM Cloud) developers.
+        </p>
+        <!--button class="btn btn-primary btn-lg" type="button">Example button</button-->
+      </div>
+    </div>
+
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 text-white bg-dark rounded-3">
+          <h2>Compare Rules</h2>
+          <p>
+              You might be working on a PCM project where the rules are being changed frequently.
+              But, there's no option to track what is being changed. You may find this tool useful, if you are in the state.
+              You can compare two POVs and get the output by ruleset/rule.
+          </p>
+            <a href="upload"><button class="btn btn-outline-light" type="button" >Access the Tool</button></a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3">
+          <h2>Documentation</h2>
+          <p>
+              The source code is available in a <a href="https://github.com/essbasedev/pcm-compare-rules">github repo</a>. You may refer the
+              <a href="https://github.com/essbasedev/pcm-compare-rules/wiki">wikipage</a> to see the documentation
+              (Don't click the link as it's not created yet! 🤪).<br>
+              (Tl,dr) So the concept is simple, you extract the rule file from program documentation as xml and upload it in the tool.
+              The tool compares the files and display the differences in table.
+          </p>
+            <a href="https://github.com/essbasedev/pcm-compare-rules/wiki"><button class="btn btn-outline-secondary" type="button">Wiki Page</button></a>
+        </div>
+      </div>
     </div>
 
 </div>
