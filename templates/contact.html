@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+PCM - Compare Rules
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 540px; margin-top:80px">
+    <div class="card my-5">
+        <div class="card-header">
+            <h1>{{ h1_message }}</h1>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title py-2">{{ card_title }}</h5>
+            <p class="card-text">{{ card_text }}</p>
+            <form id="contactForm" action="{{url_for('contact')}}" method="POST" class="needs-validation">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="name" name="name" type="text" placeholder="Enter your name..."
+                           required/>
+                    <label for="name">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="email" name="email" type="email" placeholder="Enter your email..."
+                           required/>
+                    <label for="email">Email address</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="phone" name="phone" type="tel"
+                           placeholder="Enter your phone number..."/>
+                    <label for="phone">Phone Number (optional)</label>
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">@</span>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="telegram_id" name="telegram_id"
+                               placeholder="Telegram ID">
+                        <label for="telegram_id">Telegram ID (optional but preferred)</label>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" id="message" name="message" placeholder="Enter your message here..."
+                              style="height: 8rem" required></textarea>
+                    <label for="message">Message</label>
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="agree" name='agree' required>
+                    <label class="form-check-label" for="agree">I agree to contact me with any of the above
+                        options.</label>
+                </div>
+                <button type="submit" class="btn btn-dark w-100 btn-lg" id="sendMessageButton">Send</button>
+                <div class="form-text my-2 mb-2"><b>Note:</b> Your contact details will be used only for communication purpose and not be shared with anyone else.</div>
+            </form>
+        </div>
+    </div>
+</div>
+    <script>
+    (() => {
+          'use strict'
+
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      const forms = document.querySelectorAll('.needs-validation')
+
+      // Loop over them and prevent submission
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+    }, false)
+    })
+    })()
+
+    </script>
+    {% endblock %}

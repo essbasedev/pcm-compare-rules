@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+PCM - Compare Rules
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row g-5 my-1">
+        <div class="col-6" style="margin-top: 0;">
+            <div class="card">
+                <div class="card-header">
+                    Read Me First!
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Instructions</h5>
+                    <!--p class="card-text">Some Random Text</p-->
+                    <form method="post" enctype="multipart/form-data">
+                        <ul>
+                            <li>This tool helps to compare two PCM rule files</li>
+                            <li>This can be used to compare two identical applications, when rules are updated in one application</li>
+                            <li>Or this can be used for comparing rules in an application but between different POVs</li>
+                            <li>The reason for building this tool is that there's bi such inbuilt options provided by Oracle to the users.</li>
+                            <li>You need to export the rule files first to use this tool</li>
+                            <li>Steps to export:</li>
+                            <ul>
+                                <li>Login to HPCM ML (On premise) or PCMCS (Oracle Cloud) application.</li>
+                                <li>Go to System Reports.</li>
+                                <li>Select the POV which you want to compare.</li>
+                                <li>Select Program Documentation then file type as XML.</li>
+                                <li>Click Run. Wait for few seconds, an XML file will be downloaded.</li>
+                                <li>Repeat this step for the other POV or other application.</li>
+                            </ul>
+                            <li>Use the browser button to select the first file.</li>
+                            <li>Clicking 'Next >>' button would upload the first file and prompt for the 2nd file.</li>
+                            <li>Clicking 'Process Files >>' button would upload the 2nd file and compare them for any changes.</li>
+                            <li>The differences will be displayed in the results page.</li>
+                            <li>The changes in ruleset name and rule names are ignored. The focus is given on the dimension members.</li>
+                            <li>The members in rule dimension (R0001 to R1000) is the key for comparison.</li>
+                            <li>The files that you upload, will be temporarily saved in the server and immediately deleted after the comparison result is generated.</li>
+                            <li>The source code of this tool is available in Github Repo. You may download and run it locally, if you have privacy issues or client requirements.</li>
+
+
+                        </ul>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-6" style="margin-top: 0;">
+            <div class="card">
+                <div class="card-header">
+                    File Upload
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ step }}</h5>
+                    <form method="post" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                        {{ wtf.form_field(form.file_select, class='form-control my-2', accept=".xml") }}
+                        <div class="text-end">
+                            <input type="submit" class='w-50 btn btn-lg btn-dark mt-3 my-3' value='{{ btn_val }}'>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-2">
+            <div class="card">
+                <div class="card-header">
+                    Program Log:
+                </div>
+                <div class="card-body">
+                    <!--h5 class="card-title">Logs</h5-->
+                    <!--p class="card-text">Some Random Text</p-->
+                    <form method="post" enctype="multipart/form-data">
+                        {% for item in log %}
+                        {{ item }}<br>
+                        {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
