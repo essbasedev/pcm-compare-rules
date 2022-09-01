@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import requests
 from flask import Flask, render_template, request, url_for, redirect
 from flask_bootstrap import Bootstrap
 import os
@@ -67,7 +68,9 @@ def result():
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
-    return render_template('about.html')
+    kanye_api = requests.get('https://api.kanye.rest/')
+    api_data = kanye_api.json()['quote']
+    return render_template('about.html', quote=api_data)
 
 
 @app.route('/contact', methods=['GET', 'POST'])

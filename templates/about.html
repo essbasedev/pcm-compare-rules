@@ -2,12 +2,23 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-PCM - Compare Rules
+PCM Tools - About
 {% endblock %}
 
 {% block content %}
 
-<div class="container-xxl">
-    This page is not ready yet!
+<div class="container-xxl" style="max-width: 500px">
+    <div class="h2 text-center">This page is not ready yet!</div>
+    <div class="h6 text-center"><em>Spend sometime to read a random quote!</em></div>
+    <div class="my-5">
+        <figure class="text-center">
+            <blockquote class="blockquote">
+                <p>{{ quote }}</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Quote by <cite title="Source Title">Kanye West</cite>
+            </figcaption>
+        </figure>
+    </div>
 </div>
 {% endblock %}
