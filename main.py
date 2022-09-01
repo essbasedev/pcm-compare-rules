@@ -144,3 +144,9 @@ def compare_files(file1, file2):
 
     # print(final_output)
     # write_csv('sample/output.csv', final_output)
+
+    # delete xml file after all the steps.
+    if os.path.exists(file1):
+        os.remove(file1)
+    if os.path.exists(file2):
+        os.remove(file2)
