@@ -31,7 +31,7 @@ def home():
     return render_template('index.html')
 
 
-@app.route('/upload/', methods=['GET', 'POST'])
+@app.route('/compare-rules', methods=['GET', 'POST'])
 def upload():
     log = ["🟡 Waiting for first file to upload"]
     global file1_name, file2_name
@@ -61,7 +61,7 @@ def upload():
     return render_template('upload.html', form=form, step='Step 1', btn_val="Next >>", log=log)
 
 
-@app.route('/result', methods=['GET'])
+@app.route('/compare-rules/results', methods=['GET'])
 def result():
     return render_template('result.html', output=final_output)
 
