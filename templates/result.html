@@ -16,7 +16,7 @@ PCM - Compare Rules
       new gridjs.Grid({
         columns: [
           { id: 'Application_Name', name: 'Application Name', sort: true },
-          { id: 'Sheet_Name', name: 'Sheet Name', sort: true },
+          { id: 'File_No', name: 'File No', sort: true },
           { id: 'Check', name: 'Check', sort: true},
           { id: 'Ruleset_Name', name: 'Ruleset Name', sort: false},
           { id: 'Rule_Name', name: 'Rule Name', sort: false},
@@ -29,7 +29,7 @@ PCM - Compare Rules
           {% for item in output %}
             {
               Application_Name: '{{ item['Application Name'] }}',
-              Sheet_Name: '{{ item['Sheet Name'] }}',
+              File_No: '{{ item['File No'] }}',
               Check: '{{ item['Check'] }}',
               Ruleset_Name: '{{ item['Ruleset Name'] }}',
               Rule_Name: '{{ item['Rule Name'] }}',
