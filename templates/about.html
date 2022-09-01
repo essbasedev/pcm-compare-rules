@@ -2,15 +2,23 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}
-PCM - Compare Rules
+PCM Tools - About
 {% endblock %}
 
 {% block content %}
-<div class="container" style="margin-top: 80px">
-<form method="post" enctype="multipart/form-data">
-    {{ form.csrf_token }}
-    {{ wtf.form_field(form.file_select, class='form-control my-2', accept=".xml") }}
-    {{ wtf.form_field(form.submit, class='w-50 btn btn-lg btn-dark mt-3 my-3') }}
-</form>
-{% endblock %}
 
+<div class="container-xxl" style="max-width: 500px">
+    <div class="h2 text-center">This page is not ready yet!</div>
+    <div class="h6 text-center"><em>Spend sometime to read a random quote!</em></div>
+    <div class="my-5">
+        <figure class="text-center">
+            <blockquote class="blockquote">
+                <p>{{ quote }}</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Quote by <cite title="Source Title">Kanye West</cite>
+            </figcaption>
+        </figure>
+    </div>
+</div>
+{% endblock %}

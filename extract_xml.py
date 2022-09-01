@@ -53,7 +53,7 @@ class ExtractXML:
 
     # This function adds the values into dictionaries inside a list,
     # This can be easily exported as table or csv
-    def add_to_csv_export(self, source_list, application_name, sheet_name, job_type):
+    def add_to_csv_export(self, source_list, application_name, file_no, job_type):
         for item in source_list:
             for component in item:
                 if component not in ignore_list:
@@ -63,7 +63,7 @@ class ExtractXML:
                     self.dimension = item.get('Dimension') if item.get('Dimension') else ""
                     self.csv_export.append({
                         'Application Name': application_name,
-                        'Sheet Name': sheet_name,
+                        'File No': file_no,
                         'Check': job_type,
                         'Ruleset Name': self.ruleset_name,
                         'Rule Name': self.rule_name,

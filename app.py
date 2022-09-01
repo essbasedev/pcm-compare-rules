@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
+import requests
+from flask import Flask, render_template, request, url_for, redirect
 from flask_bootstrap import Bootstrap
 import os
 from telegram import send_message
@@ -19,9 +20,11 @@ file2_name = None
 file1_status = False
 file2_status = False
 
+
 class UploadForm(FlaskForm):
     file_select = FileField('Select the XML file', validators=[DataRequired()])
     # submit = SubmitField(label="Upload")
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -65,16 +68,9 @@ def result():
 
 @app.route('/about', methods=['GET', 'POST'])
 def about():
-    file_form = UploadForm()
-    if file_form.validate_on_submit():
-        file2_name = file_form.file_select.data
-        # file2_new_name = os.path.join(uploads, uuid.uuid4().hex + ".xml")
-        file2_name.save(file2_name.filename)
-        # file2_name.save(file2_name)
-        return redirect(url_for('home'))
-
-    return render_template('about.html', form=file_form)
-
+    kanye_api = requests.get('https://api.kanye.rest/')
+    api_data = kanye_api.json()['quote']
+    return render_template('about.html', quote=api_data)
 
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -112,4 +108,3 @@ def contact():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
