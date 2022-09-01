@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from flask_bootstrap import Bootstrap
 import os
