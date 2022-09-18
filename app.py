@@ -9,6 +9,7 @@ import uuid
 from flask_wtf import FlaskForm
 from wtforms import FileField
 from wtforms.validators import DataRequired
+from log import write_log, read_log
 
 BASE_DIR = os.path.dirname(os.path.abspath(__name__))
 uploads = os.path.join(BASE_DIR, 'uploads')
@@ -33,32 +34,64 @@ def home():
 
 @app.route('/compare-rules', methods=['GET', 'POST'])
 def upload():
+    write_log("I", "Initiated upload process..")
     log = ["🟡 Waiting for first file to upload"]
     global file1_name, file2_name
     form = UploadForm()
+    write_log("I", "Upload form class has been called")
     if form.validate_on_submit():
+        write_log("I", "Validating the upload form")
         file = form.file_select.data
         file_new_name = os.path.join(uploads, uuid.uuid4().hex + ".xml")
         file.save(file_new_name)
+        write_log("I", "file saved with new name")
         if file1_name is None:
+            write_log("I", "If file1_name is none")
             try:
+                write_log("I", "Try renaming file1_name = file new name")
                 file1_name = file_new_name
                 log[0] = "🟢 File1 Uploaded successfully"
                 log.append("🟡 Waiting for 2nd file to upload")
+                write_log("I", "Initiate 2nd file upload process")
                 return render_template('upload.html', form=form, step='Step 2', btn_val="Process Files >>", log=log)
             except:
+                write_log("E", "Error renaming file1_name = file new name ")
                 log[0] = "🔴 Error in uploading 1st file. Please try again."
         elif file2_name is None:
+            write_log("I", "If file2_name is none")
             try:
+                write_log("I", "try file2_name = file_new_name")
                 file2_name = file_new_name
-                compare_files(file1_name, file2_name)
-                return redirect(url_for('result'))
             except:
                 log[0] = "🟢 File1 Uploaded successfully"
                 log.append("🔴 Error in uploading 2nd file. Please try again.")
+                write_log("E", "Error renaming file2_name = file new name ")
+            try:
+                write_log("I", "Try comparing files")
+                compare_files(file1_name, file2_name)
+                write_log("I", "Success, the result is displayed.")
+                return redirect(url_for('result'))
+
+            except:
+                write_log("E", "Error in comparing files")
+                return redirect(url_for('error'))
+
     file1_name = None
+    write_log("I", "file1_name=None")
     file2_name = None
+    write_log("I", "file2_name=None")
     return render_template('upload.html', form=form, step='Step 1', btn_val="Next >>", log=log)
+
+
+@app.route('/compare-rules/error', methods=['GET'])
+def error():
+    return render_template('error.html')
+
+
+@app.route('/compare-rules/log', methods=['GET'])
+def app_log():
+    log_data = read_log()
+    return render_template('log.html', log_data=log_data)
 
 
 @app.route('/compare-rules/results', methods=['GET'])
@@ -107,4 +140,4 @@ def contact():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
