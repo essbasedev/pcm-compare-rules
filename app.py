@@ -56,6 +56,13 @@ def upload():
             except:
                 log[0] = "🟢 File1 Uploaded successfully"
                 log.append("🔴 Error in uploading 2nd file. Please try again.")
+            try:
+                compare_files(file1_name, file2_name)
+                return redirect(url_for('result'))
+
+            except:
+                return redirect(url_for('home'))
+
     file1_name = None
     file2_name = None
     return render_template('upload.html', form=form, step='Step 1', btn_val="Next >>", log=log)
